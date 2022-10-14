@@ -7,21 +7,22 @@ void setup() {
 }
 
 void loop() {
-
-  if (Serial.available() > 0 ){
+  if (Serial.available() > 0){
     char message = Serial.read();
-
     if (message == 'u'){
       digitalWrite(led_pin, HIGH);
-    } else if (message == 'd'){
+    }
+    else if (message == 'd'){
       digitalWrite(led_pin, LOW);
-    } else if (message == 's'){
+    }
+    else if (message == 'f' || message == 'a'){
       int val = analogRead(sensor_pin);
-      val = map (val, 0, 1023, 100, 999);
+      val = map(val, 0, 1023, 100, 999);
       Serial.print(val);
-    } else{
-      Serial.println("Uknown message");
+    }
+    else if(message != 'b'){
+      Serial.println("Unknown message");
     }
   }
-  
 }
+
